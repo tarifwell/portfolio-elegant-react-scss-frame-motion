@@ -9,7 +9,7 @@ const readSkillsFile = () => {
     const dataFile = fs.readFileSync(dataFilePath, 'utf8');
     return JSON.parse(dataFile);
   } catch (error) {
-    console.error('Failed to read JSON file: ', error);
+    console.error('Failed to read JSON file: ', error);    
     return [];
   }
 };
@@ -31,7 +31,7 @@ exports.getAllSkills = () => {
   return data.documents;
 };
 
-exports.getSkillMeta = () => {
+exports.getSkillsMeta = () => {
   const data = readSkillsFile();
   return data.meta;
 };
@@ -43,50 +43,52 @@ exports.getSkillById = (id) => {
 
 exports.getSkillByName = (name) => {
   const data = readSkillsFile();
-  return data.documents.filter((elt) => elt.name.toLowerCase().contains(name.toLowerCase()));
+  return data.documents.filter((elt) => elt.name.toLowerCase().includes(name.toLowerCase()));
 };
 
 exports.addSkill = (newSkill) => {
   const data = readSkillsFile();
-  const itExists = data.documents.find(elt => elt.name === newSkill.name);
-  if (!itExists) {
-    newSkill.id = data.documents.lenght + 1;
-    data.documents.push(newSkill);
-    writeSkillsFile(data);
-    console.log('Element added successfully.');
-    return newSkill;
-  } else {
+  const itExists = data.documents.find(elt => elt.name.toLowerCase() === newSkill.name.toLowerCase());
+
+  if (itExists) {
     console.log('An object with this name already exists.');
-    // return itExists;
-    return null;
+    return null;    
   }
+
+  newSkill.id = data.documents.length + 1;
+  data.documents.push(newSkill);
+  writeSkillsFile(data);
+  console.log('Element added successfully.');
+  return newSkill;
 };
 
 exports.updateSkill = (id, updatedSkill) => {
   const data = readSkillsFile();
   const index = data.documents.findIndex(elt => elt.id === id);
-  if (index > -1) {
-    updatedSkill.id = id;
-    data.documents[index] = updatedSkill;
-    writeSkillsFile(data);
-    console.log('Element updated successfully.');
-    return updatedSkill;
-  } else {
+
+  if (index === -1) {
     console.log('No element found with this id.');
     return null;
   }
+
+  updatedSkill.id = id; 
+  data.documents[index] = { ...data.documents[index], ...updatedSkill };
+  writeSkillsFile(data);
+  console.log('Element updated successfully.');
+  return updatedSkill;
 };
 
 exports.deleteSkill = (id) => {
   const data = readSkillsFile();
   const index = data.documents.findIndex(elt => elt.id === id);
-  if (index > -1) {
-    const deletedElement = data.documents.splice(index, 1);
-    writeSkillsFile(data);
-    console.log('Element deleted successfully.');
-    return deletedElement;
-  } else {
+
+  if (index === -1) {
     console.log('No element found with this id.');
-    return null;
+    return false;
   }
+
+  data.documents.splice(index, 1);
+  writeSkillsFile(data);
+  console.log('Element deleted successfully.');
+  return true;
 };

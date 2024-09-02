@@ -9,7 +9,7 @@ const readAboutsFile = () => {
     const dataFile = fs.readFileSync(dataFilePath, 'utf8');
     return JSON.parse(dataFile);
   } catch (error) {
-    console.error('Failed to read JSON file: ', error);
+    console.error('Failed to read JSON file: ', error);    
     return [];
   }
 };
@@ -31,7 +31,7 @@ exports.getAllAbouts = () => {
   return data.documents;
 };
 
-exports.getAboutMeta = () => {
+exports.getAboutsMeta = () => {
   const data = readAboutsFile();
   return data.meta;
 };
@@ -43,49 +43,52 @@ exports.getAboutById = (id) => {
 
 exports.getAboutByName = (name) => {
   const data = readAboutsFile();
-  return data.documents.filter((elt) => elt.title.toLowerCase().contains(name.toLowerCase()));
+  return data.documents.filter((elt) => elt.name.toLowerCase().includes(name.toLowerCase()));
 };
 
 exports.addAbout = (newAbout) => {
   const data = readAboutsFile();
-  const itExists = data.documents.find(elt => elt.title === newAbout.title);
-  if (!itExists) {
-    newAbout.id = data.documents.lenght + 1;
-    data.documents.push(newAbout);
-    writeAboutsFile(data);
-    console.log('Element added successfully.');
-    return newAbout;
-  } else {
-    console.log('An object with this title already exists.');
-    return null; // return itExists;
+  const itExists = data.documents.find(elt => elt.name.toLowerCase() === newAbout.name.toLowerCase());
+
+  if (itExists) {
+    console.log('An object with this name already exists.');
+    return null;    
   }
+
+  newAbout.id = data.documents.length + 1;
+  data.documents.push(newAbout);
+  writeAboutsFile(data);
+  console.log('Element added successfully.');
+  return newAbout;
 };
 
 exports.updateAbout = (id, updatedAbout) => {
   const data = readAboutsFile();
   const index = data.documents.findIndex(elt => elt.id === id);
-  if (index > -1) {
-    updatedAbout.id = id; // To avoid id duplication in the updated array    
-    data.documents[index] = updatedAbout;
-    writeAboutsFile(data);
-    console.log('Element updated successfully.');
-    return updatedAbout;
-  } else {
+
+  if (index === -1) {
     console.log('No element found with this id.');
     return null;
   }
+
+  updatedAbout.id = id; 
+  data.documents[index] = { ...data.documents[index], ...updatedAbout };
+  writeAboutsFile(data);
+  console.log('Element updated successfully.');
+  return updatedAbout;
 };
 
 exports.deleteAbout = (id) => {
   const data = readAboutsFile();
   const index = data.documents.findIndex(elt => elt.id === id);
-  if (index > -1) {
-    const deletedElement = data.documents.splice(index, 1);
-    writeAboutsFile(data);
-    console.log('Element deleted successfully.');
-    return deletedElement; //return true;
-  } else {
+
+  if (index === -1) {
     console.log('No element found with this id.');
-    return null; //return false;
+    return false;
   }
+
+  data.documents.splice(index, 1);
+  writeAboutsFile(data);
+  console.log('Element deleted successfully.');
+  return true;
 };

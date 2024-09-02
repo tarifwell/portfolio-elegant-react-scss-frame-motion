@@ -9,7 +9,7 @@ const readExperiencesFile = () => {
     const dataFile = fs.readFileSync(dataFilePath, 'utf8');
     return JSON.parse(dataFile);
   } catch (error) {
-    console.error('Failed to read JSON file: ', error);
+    console.error('Failed to read JSON file: ', error);    
     return [];
   }
 };
@@ -31,7 +31,7 @@ exports.getAllExperiences = () => {
   return data.documents;
 };
 
-exports.getExperienceMeta = () => {
+exports.getExperiencesMeta = () => {
   const data = readExperiencesFile();
   return data.meta;
 };
@@ -43,49 +43,52 @@ exports.getExperienceById = (id) => {
 
 exports.getExperienceByName = (name) => {
   const data = readExperiencesFile();
-  return data.documents.filter((elt) => elt.name.toLowerCase().contains(name.toLowerCase()));
+  return data.documents.filter((elt) => elt.name.toLowerCase().includes(name.toLowerCase()));
 };
 
 exports.addExperience = (newExperience) => {
   const data = readExperiencesFile();
-  const itExists = data.documents.find(elt => elt.name === newExperience.name);
-  if (!itExists) {
-    newExperience.id = data.documents.lenght + 1;
-    data.documents.push(newExperience);
-    writeExperiencesFile(data);
-    console.log('Element added successfully.');
-    return newExperience;
-  } else {
+  const itExists = data.documents.find(elt => elt.name.toLowerCase() === newExperience.name.toLowerCase());
+
+  if (itExists) {
     console.log('An object with this name already exists.');
-    return null;
+    return null;    
   }
+
+  newExperience.id = data.documents.length + 1;
+  data.documents.push(newExperience);
+  writeExperiencesFile(data);
+  console.log('Element added successfully.');
+  return newExperience;
 };
 
 exports.updateExperience = (id, updatedExperience) => {
   const data = readExperiencesFile();
   const index = data.documents.findIndex(elt => elt.id === id);
-  if (index > -1) {
-    updatedExperience.id = id;
-    data.documents[index] = updatedExperience;
-    writeExperiencesFile(data);
-    console.log('Element updated successfully.');
-    return updatedExperience;
-  } else {
+
+  if (index === -1) {
     console.log('No element found with this id.');
     return null;
   }
+
+  updatedExperience.id = id; 
+  data.documents[index] = { ...data.documents[index], ...updatedExperience };
+  writeExperiencesFile(data);
+  console.log('Element updated successfully.');
+  return updatedExperience;
 };
 
 exports.deleteExperience = (id) => {
   const data = readExperiencesFile();
   const index = data.documents.findIndex(elt => elt.id === id);
-  if (index > -1) {
-    const deletedElement = data.documents.splice(index, 1);
-    writeExperiencesFile(data);
-    console.log('Element deleted successfully.');
-    return deletedElement;
-  } else {
+
+  if (index === -1) {
     console.log('No element found with this id.');
-    return null;
+    return false;
   }
+
+  data.documents.splice(index, 1);
+  writeExperiencesFile(data);
+  console.log('Element deleted successfully.');
+  return true;
 };

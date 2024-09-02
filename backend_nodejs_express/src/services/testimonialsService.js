@@ -9,7 +9,7 @@ const readTestimonialsFile = () => {
     const dataFile = fs.readFileSync(dataFilePath, 'utf8');
     return JSON.parse(dataFile);
   } catch (error) {
-    console.error('Failed to read JSON file: ', error);
+    console.error('Failed to read JSON file: ', error);    
     return [];
   }
 };
@@ -31,7 +31,7 @@ exports.getAllTestimonials = () => {
   return data.documents;
 };
 
-exports.getTestimonialMeta = () => {
+exports.getTestimonialsMeta = () => {
   const data = readTestimonialsFile();
   return data.meta;
 };
@@ -43,49 +43,52 @@ exports.getTestimonialById = (id) => {
 
 exports.getTestimonialByName = (name) => {
   const data = readTestimonialsFile();
-  return data.documents.filter((elt) => elt.name.toLowerCase().contains(name.toLowerCase()));
+  return data.documents.filter((elt) => elt.name.toLowerCase().includes(name.toLowerCase()));
 };
 
 exports.addTestimonial = (newTestimonial) => {
   const data = readTestimonialsFile();
-  const itExists = data.documents.find(elt => elt.name === newTestimonial.name);
-  if (!itExists) {
-    newTestimonial.id = data.documents.lenght + 1;
-    data.documents.push(newTestimonial);
-    writeTestimonialsFile(data);
-    console.log('Element added successfully.');
-    return newTestimonial;
-  } else {
+  const itExists = data.documents.find(elt => elt.name.toLowerCase() === newTestimonial.name.toLowerCase());
+
+  if (itExists) {
     console.log('An object with this name already exists.');
-    return null;
+    return null;    
   }
+
+  newTestimonial.id = data.documents.length + 1;
+  data.documents.push(newTestimonial);
+  writeTestimonialsFile(data);
+  console.log('Element added successfully.');
+  return newTestimonial;
 };
 
 exports.updateTestimonial = (id, updatedTestimonial) => {
   const data = readTestimonialsFile();
   const index = data.documents.findIndex(elt => elt.id === id);
-  if (index > -1) {
-    updatedTestimonial.id = id;  
-    data.documents[index] = updatedTestimonial;
-    writeTestimonialsFile(data);
-    console.log('Element updated successfully.');
-    return updatedTestimonial;
-  } else {
+
+  if (index === -1) {
     console.log('No element found with this id.');
     return null;
   }
+
+  updatedTestimonial.id = id; 
+  data.documents[index] = { ...data.documents[index], ...updatedTestimonial };
+  writeTestimonialsFile(data);
+  console.log('Element updated successfully.');
+  return updatedTestimonial;
 };
 
 exports.deleteTestimonial = (id) => {
   const data = readTestimonialsFile();
   const index = data.documents.findIndex(elt => elt.id === id);
-  if (index > -1) {
-    const deletedElement = data.documents.splice(index, 1);
-    writeTestimonialsFile(data);
-    console.log('Element deleted successfully.');
-    return deletedElement;
-  } else {
+
+  if (index === -1) {
     console.log('No element found with this id.');
-    return null;
+    return false;
   }
+
+  data.documents.splice(index, 1);
+  writeTestimonialsFile(data);
+  console.log('Element deleted successfully.');
+  return true;
 };

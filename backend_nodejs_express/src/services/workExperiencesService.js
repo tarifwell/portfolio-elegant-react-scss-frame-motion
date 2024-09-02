@@ -9,7 +9,7 @@ const readWorkExperiencesFile = () => {
     const dataFile = fs.readFileSync(dataFilePath, 'utf8');
     return JSON.parse(dataFile);
   } catch (error) {
-    console.error('Failed to read JSON file: ', error);
+    console.error('Failed to read JSON file: ', error);    
     return [];
   }
 };
@@ -31,7 +31,7 @@ exports.getAllWorkExperiences = () => {
   return data.documents;
 };
 
-exports.getWorkExperienceMeta = () => {
+exports.getWorkExperiencesMeta = () => {
   const data = readWorkExperiencesFile();
   return data.meta;
 };
@@ -43,49 +43,52 @@ exports.getWorkExperienceById = (id) => {
 
 exports.getWorkExperienceByName = (name) => {
   const data = readWorkExperiencesFile();
-  return data.documents.filter((elt) => elt.name.toLowerCase().contains(name.toLowerCase()));
+  return data.documents.filter((elt) => elt.name.toLowerCase().includes(name.toLowerCase()));
 };
 
 exports.addWorkExperience = (newWorkExperience) => {
   const data = readWorkExperiencesFile();
-  const itExists = data.documents.find((elt) => elt.name === newWorkExperience.name);
-  if (!itExists) {
-    newWorkExperience.id = data.documents.lenght + 1;
-    data.documents.push(newWorkExperience);
-    writeWorkExperiencesFile(data);
-    console.log('Element added successfully.');
-    return newWorkExperience;
-  } else {
+  const itExists = data.documents.find(elt => elt.name.toLowerCase() === newWorkExperience.name.toLowerCase());
+
+  if (itExists) {
     console.log('An object with this name already exists.');
-    return null;
+    return null;    
   }
+
+  newWorkExperience.id = data.documents.length + 1;
+  data.documents.push(newWorkExperience);
+  writeWorkExperiencesFile(data);
+  console.log('Element added successfully.');
+  return newWorkExperience;
 };
 
 exports.updateWorkExperience = (id, updatedWorkExperience) => {
   const data = readWorkExperiencesFile();
   const index = data.documents.findIndex(elt => elt.id === id);
-  if (index > -1) {
-    updatedWorkExperience.id = id;
-    data.documents[index] = updatedWorkExperience;
-    writeWorkExperiencesFile(data);
-    console.log('Element updated successfully.');
-    return updatedWorkExperience;
-  } else {
+
+  if (index === -1) {
     console.log('No element found with this id.');
     return null;
   }
+
+  updatedWorkExperience.id = id; 
+  data.documents[index] = { ...data.documents[index], ...updatedWorkExperience };
+  writeWorkExperiencesFile(data);
+  console.log('Element updated successfully.');
+  return updatedWorkExperience;
 };
 
 exports.deleteWorkExperience = (id) => {
   const data = readWorkExperiencesFile();
   const index = data.documents.findIndex(elt => elt.id === id);
-  if (index > -1) {
-    const deletedElement = data.documents.splice(index, 1);
-    writeWorkExperiencesFile(data);
-    console.log('Element deleted successfully.');
-    return deletedElement;
-  } else {
+
+  if (index === -1) {
     console.log('No element found with this id.');
-    return null;
+    return false;
   }
+
+  data.documents.splice(index, 1);
+  writeWorkExperiencesFile(data);
+  console.log('Element deleted successfully.');
+  return true;
 };

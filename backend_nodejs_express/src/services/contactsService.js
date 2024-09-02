@@ -9,7 +9,7 @@ const readContactsFile = () => {
     const dataFile = fs.readFileSync(dataFilePath, 'utf8');
     return JSON.parse(dataFile);
   } catch (error) {
-    console.error('Failed to read JSON file: ', error);
+    console.error('Failed to read JSON file: ', error);    
     return [];
   }
 };
@@ -31,7 +31,7 @@ exports.getAllContacts = () => {
   return data.documents;
 };
 
-exports.getContactMeta = () => {
+exports.getContactsMeta = () => {
   const data = readContactsFile();
   return data.meta;
 };
@@ -43,49 +43,52 @@ exports.getContactById = (id) => {
 
 exports.getContactByName = (name) => {
   const data = readContactsFile();
-  return data.documents.filter((elt) => elt.name.toLowerCase().contains(name.toLowerCase()));
+  return data.documents.filter((elt) => elt.name.toLowerCase().includes(name.toLowerCase()));
 };
 
 exports.addContact = (newContact) => {
   const data = readContactsFile();
-  const itExists = data.documents.find(elt => elt.name === newContact.name);
-  if (!itExists) {
-    newContact.id = data.documents.lenght + 1;
-    data.documents.push(newContact);
-    writeContactsFile(data);
-    console.log('Element added successfully.');
-    return newContact;
-  } else {
+  const itExists = data.documents.find(elt => elt.name.toLowerCase() === newContact.name.toLowerCase());
+
+  if (itExists) {
     console.log('An object with this name already exists.');
-    return null;
+    return null;    
   }
+
+  newContact.id = data.documents.length + 1;
+  data.documents.push(newContact);
+  writeContactsFile(data);
+  console.log('Element added successfully.');
+  return newContact;
 };
 
 exports.updateContact = (id, updatedContact) => {
   const data = readContactsFile();
   const index = data.documents.findIndex(elt => elt.id === id);
-  if (index > -1) {
-    updatedContact.id = id;
-    data.documents[index] = updatedContact;
-    writeContactsFile(data);
-    console.log('Element updated successfully.');
-    return updatedContact;
-  } else {
+
+  if (index === -1) {
     console.log('No element found with this id.');
     return null;
   }
+
+  updatedContact.id = id; 
+  data.documents[index] = { ...data.documents[index], ...updatedContact };
+  writeContactsFile(data);
+  console.log('Element updated successfully.');
+  return updatedContact;
 };
 
 exports.deleteContact = (id) => {
   const data = readContactsFile();
   const index = data.documents.findIndex(elt => elt.id === id);
-  if (index > -1) {
-    const deletedElement = data.documents.splice(index, 1);
-    writeContactsFile(data);
-    console.log('Element deleted successfully.');
-    return deletedElement;
-  } else {
+
+  if (index === -1) {
     console.log('No element found with this id.');
-    return null;
+    return false;
   }
+
+  data.documents.splice(index, 1);
+  writeContactsFile(data);
+  console.log('Element deleted successfully.');
+  return true;
 };
