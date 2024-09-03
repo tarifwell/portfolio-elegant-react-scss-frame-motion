@@ -25,7 +25,7 @@ exports.getExperienceById = (req, res) => {
 };
 
 // Search elements by keyword
-exports.getExperienceByName = (req, res) => {
+exports.getExperiencesByName = (req, res) => {
     const name = req.query.name;
     const experiences = experiencesService.getExperienceByName(name);
 

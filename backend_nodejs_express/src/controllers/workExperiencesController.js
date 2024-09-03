@@ -25,7 +25,7 @@ exports.getWorkExperienceById = (req, res) => {
 };
 
 // Search elements by keyword
-exports.getWorkExperienceByName = (req, res) => {
+exports.getWorkExperiencesByName = (req, res) => {
     const name = req.query.name;
     const workExperiences = workExperiencesService.getWorkExperienceByName(name);
 

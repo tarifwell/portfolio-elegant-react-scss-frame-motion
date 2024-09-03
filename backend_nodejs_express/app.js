@@ -10,8 +10,6 @@ const testimonialsRoutes = require('./src/routes/testimonialsRoutes');
 const workExperiencesRoutes = require('./src/routes/workExperiencesRoutes');
 const worksRoutes = require('./src/routes/worksRoutes');
 
-
-
 const app = express();
 const PORT = process.env.PORT || 3000;
 

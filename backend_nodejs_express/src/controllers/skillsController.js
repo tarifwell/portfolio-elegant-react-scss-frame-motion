@@ -13,7 +13,7 @@ exports.getSkillsMeta = (req, res) => {
 };
 
 // Find element by ID
-exports.getSkillById = (req, res) => {
+exports.getSkillsById = (req, res) => {
     const skillId = parseInt(req.params.id);
     const skill = skillsService.getSkillById(skillId);
 

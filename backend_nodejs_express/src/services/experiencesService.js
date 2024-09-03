@@ -41,7 +41,7 @@ exports.getExperienceById = (id) => {
   return data.documents.find((elt) => elt.id === id);  
 };
 
-exports.getExperienceByName = (name) => {
+exports.getExperiencesByName = (name) => {
   const data = readExperiencesFile();
   return data.documents.filter((elt) => elt.name.toLowerCase().includes(name.toLowerCase()));
 };

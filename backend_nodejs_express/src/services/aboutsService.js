@@ -41,7 +41,7 @@ exports.getAboutById = (id) => {
   return data.documents.find((elt) => elt.id === id);  
 };
 
-exports.getAboutByName = (name) => {
+exports.getAboutsByName = (name) => {
   const data = readAboutsFile();
   return data.documents.filter((elt) => elt.name.toLowerCase().includes(name.toLowerCase()));
 };

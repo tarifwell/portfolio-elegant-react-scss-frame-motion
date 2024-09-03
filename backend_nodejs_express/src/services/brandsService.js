@@ -41,7 +41,7 @@ exports.getBrandById = (id) => {
   return data.documents.find((elt) => elt.id === id);  
 };
 
-exports.getBrandByName = (name) => {
+exports.getBrandsByName = (name) => {
   const data = readBrandsFile();
   return data.documents.filter((elt) => elt.name.toLowerCase().includes(name.toLowerCase()));
 };

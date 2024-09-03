@@ -25,7 +25,7 @@ exports.getTestimonialById = (req, res) => {
 };
 
 // Search elements by keyword
-exports.getTestimonialByName = (req, res) => {
+exports.getTestimonialsByName = (req, res) => {
     const name = req.query.name;
     const testimonials = testimonialsService.getTestimonialByName(name);
 

@@ -25,7 +25,7 @@ exports.getBrandById = (req, res) => {
 };
 
 // Search elements by keyword
-exports.getBrandByName = (req, res) => {
+exports.getBrandsByName = (req, res) => {
     const name = req.query.name;
     const brands = brandsService.getBrandByName(name);
 

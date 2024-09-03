@@ -41,7 +41,7 @@ exports.getSkillById = (id) => {
   return data.documents.find((elt) => elt.id === id);  
 };
 
-exports.getSkillByName = (name) => {
+exports.getSkillsByName = (name) => {
   const data = readSkillsFile();
   return data.documents.filter((elt) => elt.name.toLowerCase().includes(name.toLowerCase()));
 };

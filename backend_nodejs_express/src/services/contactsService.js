@@ -41,7 +41,7 @@ exports.getContactById = (id) => {
   return data.documents.find((elt) => elt.id === id);  
 };
 
-exports.getContactByName = (name) => {
+exports.getContactsByName = (name) => {
   const data = readContactsFile();
   return data.documents.filter((elt) => elt.name.toLowerCase().includes(name.toLowerCase()));
 };

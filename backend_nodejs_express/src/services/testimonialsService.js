@@ -41,7 +41,7 @@ exports.getTestimonialById = (id) => {
   return data.documents.find((elt) => elt.id === id);  
 };
 
-exports.getTestimonialByName = (name) => {
+exports.getTestimonialsByName = (name) => {
   const data = readTestimonialsFile();
   return data.documents.filter((elt) => elt.name.toLowerCase().includes(name.toLowerCase()));
 };

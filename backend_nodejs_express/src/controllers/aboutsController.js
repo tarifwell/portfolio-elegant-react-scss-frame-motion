@@ -25,7 +25,7 @@ exports.getAboutById = (req, res) => {
 };
 
 // Search elements by keyword
-exports.getAboutByName = (req, res) => {
+exports.getAboutsByName = (req, res) => {
     const name = req.query.name;
     const abouts = aboutsService.getAboutByName(name);
 

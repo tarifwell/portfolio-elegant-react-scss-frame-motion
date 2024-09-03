@@ -27,7 +27,7 @@ exports.getWorkById = (req, res) => {
 // Search elements by keyword
 exports.getWorkByName = (req, res) => {
     const name = req.query.name;
-    const works = worksService.getWorkByName(name);
+    const works = worksService.getWorksByName(name);
 
     if (!works.length) {
         return res.status(404).json({ message: 'No works found with the given name' });

@@ -25,7 +25,7 @@ exports.getContactById = (req, res) => {
 };
 
 // Search elements by keyword
-exports.getContactByName = (req, res) => {
+exports.getContactsByName = (req, res) => {
     const name = req.query.name;
     const contacts = contactsService.getContactByName(name);
 
