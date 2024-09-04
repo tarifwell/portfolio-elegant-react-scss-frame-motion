@@ -1,10 +1,12 @@
-import React from 'react'
-import { useState } from 'react';
-import './Navbar.scss';
-import { images } from '../../constants';
-import { FaTimes } from 'react-icons/fa';
+import React, { useState } from 'react';
 import { HiMenuAlt4, HiX } from 'react-icons/hi';
 import { motion } from 'framer-motion';
+// import { FaTimes } from 'react-icons/fa';
+
+import './Navbar.scss';
+import { images } from '../../constants';
+
+
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
