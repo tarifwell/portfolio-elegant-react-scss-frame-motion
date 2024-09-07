@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const expereriencesController = require('../controllers/expereriencesController');
+const expereriencesController = require('../controllers/experiencesController');
 
 // Routes
 router.get('/expereriences', expereriencesController.getAllExperiences);
