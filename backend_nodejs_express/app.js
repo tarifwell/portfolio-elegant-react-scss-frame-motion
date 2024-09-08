@@ -9,7 +9,7 @@ const brandsRoutes = require('./src/routes/brandsRoutes');
 // const skillsRoutes = require('./src/routes/skillsRoutes');
 // const testimonialsRoutes = require('./src/routes/testimonialsRoutes');
 // const workExperiencesRoutes = require('./src/routes/workExperiencesRoutes');
-// const worksRoutes = require('./src/routes/worksRoutes');
+const worksRoutes = require('./src/routes/worksRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -25,7 +25,7 @@ app.use('/api', brandsRoutes);
 // app.use('/api', skillsRoutes);
 // app.use('/api', testimonialsRoutes);
 // app.use('/api', workExperiencesRoutes);
-// app.use('/api', worksRoutes);
+app.use('/api', worksRoutes);
 
 
 app.listen(PORT, () => {

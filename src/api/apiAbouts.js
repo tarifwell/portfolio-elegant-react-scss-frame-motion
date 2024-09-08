@@ -1,8 +1,8 @@
 // src/api/abouts.js
 import axios from "axios";
 
-const API_URL = "http://localhost:3001/api/abouts";
-// const API_URL = process.env.;
+// const API_URL = "http://localhost:3001/api/abouts";
+const API_URL = process.env.REACT_APP_API_URL+"/abouts";
 
 export const getAllAbouts = async () => {
   try {

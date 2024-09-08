@@ -25,7 +25,7 @@ exports.getWorkById = (req, res) => {
 };
 
 // Search elements by keyword
-exports.getWorkByName = (req, res) => {
+exports.getWorksByName = (req, res) => {
     const name = req.query.name;
     const works = worksService.getWorksByName(name);
 

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 
 import './About.scss';
 import { images } from '../../constants';
+import { AppWrap } from '../../wrapper';
 import { getAllAbouts } from '../../api/apiAbouts';
 
 const About = () => {
@@ -43,4 +44,4 @@ const About = () => {
   )
 }
 
-export default About
+export default AppWrap(About, 'about');
