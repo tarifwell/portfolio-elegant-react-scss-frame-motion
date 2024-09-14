@@ -1,14 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const expereriencesController = require('../controllers/experiencesController');
+const experiencesController = require('../controllers/experiencesController');
 
 // Routes
-router.get('/expereriences', expereriencesController.getAllExperiences);
-router.get('/expereriences/meta', expereriencesController.getExperiencesMeta);
-router.get('/expereriences/:id', expereriencesController.getExperienceById);
-router.get('/expereriences/search/by-name', expereriencesController.getExperiencesByName);
-router.post('/expereriences', expereriencesController.addExperience);
-router.put('/expereriences/:id', expereriencesController.updateExperience);
-router.delete('/expereriences/:id', expereriencesController.deleteExperience);
+router.get('/experiences', experiencesController.getAllExperiences);
+router.get('/experiences/meta', experiencesController.getExperiencesMeta);
+router.get('/experiences/:id', experiencesController.getExperienceById);
+router.get('/experiences/search/by-name', experiencesController.getExperiencesByName);
+router.post('/experiences', experiencesController.addExperience);
+router.put('/experiences/:id', experiencesController.updateExperience);
+router.delete('/experiences/:id', experiencesController.deleteExperience);
 
 module.exports = router;

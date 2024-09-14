@@ -111,7 +111,14 @@
 
     border-radius: 0.5rem;
     opacity: 0;
-    transition: all 0.3s ease;
+    // transition: all 0.3s ease;
+    transition: opacity 0.5s ease-in-out; // transition for progressive exit
+
+    &:hover {
+        opacity: 1; // opacity be 1 when hover
+        // transition: opacity 0.3s ease;
+        // transition: opacity 0.3s ease-out 0.1s;
+    }
 
     div {
         width: 50px;

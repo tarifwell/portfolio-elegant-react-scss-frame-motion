@@ -34,7 +34,7 @@ const About = () => {
             // key={about.title + index}
             key={`about-${index}`}
           >            
-            <img src={images[about.imgUrl.slice(0, -4).toString()]} alt={about.title} />
+            <img src={images[about.imgUrl]} alt={about.title} />
             <h2 className='bold-text' style={{ marginTop: 20 }}>{about.title}</h2>
             <p className='p-text' style={{ marginTop: 10 }}>{about.description}</p>
           </motion.div>

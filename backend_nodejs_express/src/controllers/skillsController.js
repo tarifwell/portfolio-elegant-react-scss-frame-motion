@@ -13,7 +13,7 @@ exports.getSkillsMeta = (req, res) => {
 };
 
 // Find element by ID
-exports.getSkillsById = (req, res) => {
+exports.getSkillById = (req, res) => {
     const skillId = parseInt(req.params.id);
     const skill = skillsService.getSkillById(skillId);
 
@@ -25,7 +25,7 @@ exports.getSkillsById = (req, res) => {
 };
 
 // Search elements by keyword
-exports.getSkillByName = (req, res) => {
+exports.getSkillsByName = (req, res) => {
     const name = req.query.name;
     const skills = skillsService.getSkillByName(name);
 
