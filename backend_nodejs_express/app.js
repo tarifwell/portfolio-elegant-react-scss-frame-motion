@@ -7,7 +7,7 @@ const brandsRoutes = require('./src/routes/brandsRoutes');
 // const contactsRoutes = require('./src/routes/contactsRoutes');
 const experiencesRoutes = require('./src/routes/experiencesRoutes');
 const skillsRoutes = require('./src/routes/skillsRoutes');
-// const testimonialsRoutes = require('./src/routes/testimonialsRoutes');
+const testimonialsRoutes = require('./src/routes/testimonialsRoutes');
 // const workExperiencesRoutes = require('./src/routes/workExperiencesRoutes');
 const worksRoutes = require('./src/routes/worksRoutes');
 
@@ -23,7 +23,7 @@ app.use('/api', brandsRoutes);
 // app.use('/api', contactsRoutes);
 app.use('/api', experiencesRoutes);
 app.use('/api', skillsRoutes);
-// app.use('/api', testimonialsRoutes);
+app.use('/api', testimonialsRoutes);
 // app.use('/api', workExperiencesRoutes);
 app.use('/api', worksRoutes);
 

@@ -48,18 +48,31 @@ import project_01 from '../assets/img_projects/project-01.jpg';
 import project_02 from '../assets/img_projects/project-02.jpg';
 import project_03 from '../assets/img_projects/project-03.jpg';
 import project_04 from '../assets/img_projects/project-04.jpg';
+import project_05 from '../assets/img_projects/project-05.jpg';
+import project_06 from '../assets/img_projects/project-06.jpg';
 
 import profile from '../assets/profile.png';
 import circle from '../assets/circle.png';
 import logo from '../assets/logo-5.png';
 
+import person_01 from '../assets/img_persons/person-01.jpg';
+import person_02 from '../assets/img_persons/person-02.jpg';
+import person_03 from '../assets/img_persons/person-03.jpg';
+import person_04 from '../assets/img_persons/person-04.jpg';
+import person_05 from '../assets/img_persons/person-05.jpg';
+
 // import adidas from '../assets/adidas.png';
-// import amazon from '../assets/amazon.png';
 // import asus from '../assets/asus.png';
-// import bolt from '../assets/bolt.png';
-// import nb from '../assets/nb.png';
-// import skype from '../assets/skype.png';
-// import spotify from '../assets/spotify.png';
+
+import brand_01 from '../assets/img_brands/logo-bolt-512-1.png';
+import brand_02 from '../assets/img_brands/logo-capgemini-512-1.png';
+// import brand_02 from '../assets/img_brands/logo-capgemini-512-2.png';
+// import brand_02 from '../assets/img_brands/logo-capgemini-512-3.png';
+import brand_03 from '../assets/img_brands/logo-olivetti-512-1.png';
+// import brand_03 from '../assets/img_brands/logo-olivetti-512-2.png';
+// import brand_03 from '../assets/img_brands/logo-olivetti-512-3.png';
+import brand_04 from '../assets/img_brands/logo-spotify-512-1.png';
+
 
 const images =  {
 //   email,
@@ -94,16 +107,22 @@ const images =  {
   project_02,
   project_03,
   project_04,
+  project_05,
+  project_06,
   profile,
   circle,
   logo,
+  person_01,
+  person_02,
+  person_03,
+  person_04,
+  person_05,
+  brand_01,
+  brand_02,
+  brand_03,
+  brand_04
 //   adidas,
-//   amazon,
 //   asus,
-//   bolt,
-//   nb,
-//   skype,
-//   spotify,
 };
 
 export default images;
