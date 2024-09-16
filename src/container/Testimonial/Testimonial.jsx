@@ -39,7 +39,7 @@ const Testimonial = () => {
   };
 
   return (
-    <div className="app__testimonial app__flex">
+    <>
       {testimonials.length > 0 && (
         <>
           <div className="app__testimonial-item app__flex">
@@ -94,14 +94,14 @@ const Testimonial = () => {
           </motion.div>
         ))}
       </div>
-    </div>
+    </>
   );
 };
 
 // export default AppWrap(Testimonial, 'testimonial');
 
 export default AppWrap(
-  MotionWrap(Testimonial, "app__testimonials"),
+  MotionWrap(Testimonial, "app__testimonial"),
   "testimonial",
   "app__primarybg"
 );

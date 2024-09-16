@@ -1,5 +1,5 @@
-// import email from '../assets/email.png';
-// import mobile from '../assets/mobile.png';
+import email from '../assets/icons_contact/email.png';
+import mobile from '../assets/icons_contact/mobile.png';
 // import api from '../assets/api.png';
 
 import angular from '../assets/icons_skills/ico-angular-512-1.png';
@@ -75,8 +75,8 @@ import brand_04 from '../assets/img_brands/logo-spotify-512-1.png';
 
 
 const images =  {
-//   email,
-//   mobile,
+email,
+mobile,
 //   api,
   angular,
   bootstrap,

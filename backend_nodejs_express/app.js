@@ -4,7 +4,7 @@ const express = require('express');
 
 const aboutsRoutes = require('./src/routes/aboutsRoutes');
 const brandsRoutes = require('./src/routes/brandsRoutes');
-// const contactsRoutes = require('./src/routes/contactsRoutes');
+const contactsRoutes = require('./src/routes/contactsRoutes');
 const experiencesRoutes = require('./src/routes/experiencesRoutes');
 const skillsRoutes = require('./src/routes/skillsRoutes');
 const testimonialsRoutes = require('./src/routes/testimonialsRoutes');
@@ -20,7 +20,7 @@ app.use(cors());
 // Routes
 app.use('/api', aboutsRoutes);
 app.use('/api', brandsRoutes);
-// app.use('/api', contactsRoutes);
+app.use('/api', contactsRoutes);
 app.use('/api', experiencesRoutes);
 app.use('/api', skillsRoutes);
 app.use('/api', testimonialsRoutes);
